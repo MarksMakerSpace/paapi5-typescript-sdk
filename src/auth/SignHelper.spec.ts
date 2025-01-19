@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import { HttpMethod } from '../http/types';
 import { Region } from '../requests/CommonRequest';
 import { SignHelper } from './SignHelper';

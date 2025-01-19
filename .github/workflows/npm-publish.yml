@@ -6,15 +6,21 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    # Setup .npmrc file to publish to npm
-    - uses: actions/setup-node@v1
+    - uses: actions/checkout@v4
+    - uses: pnpm/action-setup@v4
+      name: Install pnpm
       with:
-        node-version: '12.x'
+        run_install: false
+    - name: ⎔ Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: lts/*
+        cache: "pnpm"
         registry-url: 'https://registry.npmjs.org'
-    - run: yarn
-    - run: yarn test
-    - run: yarn build
-    - run: yarn publish
+    - name: 📥 Install dependencies
+      run: pnpm install
+    - run: pnpm ci
+    - run: pnpm build
+    - run: pnpm publish
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
