@@ -1,5 +1,5 @@
 {
-  "name": "paapi5-typescript-sdk",
+  "name": "@marksmakerspace/paapi5-typescript-sdk",
   "version": "0.3.0",
   "author": {
     "name": "Francesco Pigozzi",
@@ -50,5 +50,6 @@
     "rimraf": "^6.0.1",
     "typescript": "^5.7.3",
     "vitest": "^3.0.2"
-  }
+  },
+  "packageManager": "pnpm@9.13.2"
 }

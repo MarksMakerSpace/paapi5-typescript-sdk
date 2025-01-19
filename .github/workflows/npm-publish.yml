@@ -2,9 +2,13 @@ name: NPM Package
 on:
   release:
     types: [created]
+  workflow_dispatch: 
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
     - uses: actions/checkout@v4
     - uses: pnpm/action-setup@v4
@@ -19,8 +23,8 @@ jobs:
         registry-url: 'https://registry.npmjs.org'
     - name: 📥 Install dependencies
       run: pnpm install
-    - run: pnpm ci
+    - run: pnpm i
     - run: pnpm build
     - run: pnpm publish
       env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
