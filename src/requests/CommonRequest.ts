@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 import { SignHelper } from '../auth/SignHelper';
 import { Headers, HttpMethod, Payload } from '../http/types';
 import { APIError } from '../models/types';
@@ -91,13 +89,13 @@ export class CommonRequest<ResponseType extends CommonResponse = CommonResponse>
         const timestamp = Date.now();
         const payload = this._buildPayload();
 
-        const response = await axios(this._buildUrl(), {
+        const response = await fetch(this._buildUrl(), {
             method: this.method,
             headers: this._buildHeaders(timestamp, payload),
-            data: payload,
+            body: JSON.stringify(payload),
         });
 
-        return response.data as ResponseType;
+        return (await response.json()) as ResponseType;
     }
 
     protected _buildUrl(): string {
