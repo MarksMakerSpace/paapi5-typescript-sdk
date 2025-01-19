@@ -20,7 +20,7 @@ jobs:
       with:
         node-version: lts/*
         cache: "pnpm"
-        registry-url: 'https://registry.npmjs.org'
+        registry-url: 'https://npm.pkg.github.com'
     - name: 📥 Install dependencies
       run: pnpm install
     - run: pnpm i
